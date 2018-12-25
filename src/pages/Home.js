@@ -90,9 +90,16 @@ export class Home extends React.PureComponent {
             .
           </div>
           <ul className={classes.links}>
-            <a href="http://github.com/brodeynewman" className={classes.link}>my work</a>
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
+              href="http://github.com/brodeynewman"
+              className={classes.link}
+            >
+              my work
+            </a>
             <Link to="/about" className={classes.link}>about me</Link>
-            <Link to="/about" className={classes.link}>get in touch</Link>
+            <Link to="/contact" className={classes.link}>get in touch</Link>
           </ul>
         </div>
       </div>

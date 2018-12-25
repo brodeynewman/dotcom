@@ -1,11 +1,16 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import withLazyLoad from './components/withLazyLoad';
 
-import Home from './pages/Home';
+const Home = withLazyLoad(() => import('./pages/Home'));
+const About = withLazyLoad(() => import('./pages/About'));
+const Contact = withLazyLoad(() => import('./pages/Contact'));
 
 const Router = () => (
   <Switch>
-    <Route path="/" component={Home} />
+    <Route exact path="/" component={Home} />
+    <Route path="/about" component={About} />
+    <Route path="/contact" component={Contact} />
   </Switch>
 );
 
