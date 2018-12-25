@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core';
 
-import theme from './theme';
+import './styling/main.css';
 import Router from './Router';
+import theme from './styling/theme';
 
 const App = () => (
   <BrowserRouter>
