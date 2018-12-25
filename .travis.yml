@@ -1,0 +1,32 @@
+language: node_js
+
+node_js: stable
+
+stages:
+  - name: test
+    if: NOT type = push
+  - name: build
+    if: branch IN (develop, master)
+  - name: deploy
+    if: branch IN (develop, master) AND (NOT (type = pull_request))
+
+before_script:
+  - npm update -g npm
+  - curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+  - unzip awscli-bundle.zip
+  - ./awscli-bundle/install -b ~/bin/aws
+  - export PATH=~/bin:$PATH
+
+cache:
+  directories:
+  - node_modules
+  - dist
+
+jobs:
+  include:
+    - stage: test
+      script: "npm run test"
+    - stage: build
+      script: chmod +x ./scripts/build.sh && bash ./scripts/build.sh
+    - stage: deploy
+      script: chmod +x ./scripts/deploy.sh && bash ./scripts/deploy.sh

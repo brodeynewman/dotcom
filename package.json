@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx webpack-dev-server --config=./config/webpack.common.js --progress --hot -d --open"
+    "start": "npx webpack-dev-server --config=./config/webpack.common.js --progress --hot -d --open",
+    "build": "webpack -p --config=./config/webpack.production.js",
+    "test": "exit 0"
   },
   "keywords": [],
   "author": "",
@@ -35,8 +37,10 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.1.5"
   }
 }
