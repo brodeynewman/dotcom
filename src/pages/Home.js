@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
@@ -30,6 +31,7 @@ const styles = () => ({
     textDecoration: 'none',
     color: 'black',
     fontSize: '2rem',
+    display: 'inline-block',
   },
   links: {
     position: 'fixed',
@@ -50,6 +52,7 @@ const styles = () => ({
     '&:hover': {
       color: 'black',
     },
+    textDecoration: 'none',
   },
 });
 
@@ -87,9 +90,9 @@ export class Home extends React.PureComponent {
             .
           </div>
           <ul className={classes.links}>
-            <li className={classes.link}>my work</li>
-            <li className={classes.link}>about me</li>
-            <li className={classes.link}>get in touch</li>
+            <a href="http://github.com/brodeynewman" className={classes.link}>my work</a>
+            <Link to="/about" className={classes.link}>about me</Link>
+            <Link to="/about" className={classes.link}>get in touch</Link>
           </ul>
         </div>
       </div>
