@@ -4,7 +4,52 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
   root: {
-    padding: 15,
+    padding: 35,
+    display: 'flex',
+    alignItems: 'center',
+    height: 'calc(100vh - 70px)',
+  },
+  name: {
+    fontWeight: 800,
+    fontSize: 35,
+  },
+  info: {
+    paddingLeft: 10,
+    maxWidth: 450,
+    fontSize: '2rem',
+    color: '#666',
+  },
+  bio: {
+    paddingTop: 10,
+    fontSize: '2rem',
+    color: '#666',
+  },
+  passport: {
+    borderBottom: '2px solid #bd93f9',
+    marginLeft: 10,
+    textDecoration: 'none',
+    color: 'black',
+    fontSize: '2rem',
+  },
+  links: {
+    position: 'fixed',
+    bottom: 0,
+    left: 35,
+    padding: 0,
+    marginTop: 50,
+  },
+  link: {
+    display: 'inline-block',
+    padding: '10px 10px 10px 0px',
+    marginLeft: 15,
+    '&:first-child': {
+      marginLeft: 0,
+    },
+    color: '#bbb',
+    cursor: 'pointer',
+    '&:hover': {
+      color: 'black',
+    },
   },
 });
 
@@ -26,7 +71,27 @@ export class Home extends React.PureComponent {
 
     return (
       <div className={classes.root}>
-        still in home
+        <div>
+          <span className={classes.name}>Brodey Newman</span>
+          <span className={classes.info}>is a software engineer based out of Charlotte, NC.</span>
+          <div className={classes.bio}>
+            Currently working at
+            <a
+              rel="noopener noreferrer"
+              target="_blank"
+              href="http://passportinc.com"
+              className={classes.passport}
+            >
+                Passport Inc
+            </a>
+            .
+          </div>
+          <ul className={classes.links}>
+            <li className={classes.link}>my work</li>
+            <li className={classes.link}>about me</li>
+            <li className={classes.link}>get in touch</li>
+          </ul>
+        </div>
       </div>
     );
   }
