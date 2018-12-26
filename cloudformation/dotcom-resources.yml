@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: dotcom-resources
+
+Parameters:
+  ServiceName:
+    Type: String
+    Default: dotcom
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Properties:
+      AccessControl: Private
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      BucketName: !Join
+          # - !FindInMap [AccountParameterMap, "Environment", !Ref "AWS::AccountId"]
+          - !Ref ServiceName
+          # - !Ref "AWS::Region"
+      WebsiteConfiguration:
+        ErrorDocument: "index.html"
+        IndexDocument: "index.html"
+
+  S3BucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
