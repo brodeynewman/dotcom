@@ -5,9 +5,15 @@ import { withStyles } from '@material-ui/core';
 
 const styles = () => ({
   root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     position: 'fixed',
-    top: 35,
+    bottom: 25,
     left: 35,
+    color: '#666',
+    background: 'transparent',
+    border: 'none',
   },
 });
 

@@ -12,7 +12,7 @@ function push {
   aws s3 sync ${TRAVIS_BUILD_DIR}/dist s3://$S3_PROD_BUCKET
 }
 
-echoBanner "Initializing deploy"
+echoBanner "Initiating deploy"
 
 mkdir ~/.aws
 cat > ~/.aws/credentials << EOF1

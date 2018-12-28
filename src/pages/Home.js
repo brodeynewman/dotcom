@@ -41,12 +41,10 @@ const styles = () => ({
     marginTop: 50,
   },
   link: {
+    textAlign: 'center',
     display: 'inline-block',
-    padding: '10px 10px 10px 0px',
+    padding: 10,
     marginLeft: 15,
-    '&:first-child': {
-      marginLeft: 0,
-    },
     color: '#bbb',
     cursor: 'pointer',
     '&:hover': {
