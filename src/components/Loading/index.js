@@ -14,8 +14,8 @@ const styles = () => ({
   },
 });
 
-const Loading = ({ classes }) => (
-  <Loading classes={{ root: classes.loading }} />
+const Loading = ({ classes, ...rest }) => (
+  <Loading {...rest} classes={{ root: classes.loading }} />
 );
 
 Loading.propTypes = {
