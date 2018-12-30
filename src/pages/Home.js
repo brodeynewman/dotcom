@@ -57,6 +57,13 @@ const styles = () => ({
     left: 35,
     padding: 0,
     marginTop: 50,
+    '@media screen and (max-width: 550px)': {
+      display: 'flex',
+      justifyContent: 'space-around',
+      width: '75%',
+      left: '50%',
+      marginLeft: '-37.5%',
+    },
   },
   link: {
     textAlign: 'center',
@@ -69,6 +76,9 @@ const styles = () => ({
       color: 'black',
     },
     textDecoration: 'none',
+    '@media screen and (max-width: 850px)': {
+      margin: 0,
+    },
   },
 });
 

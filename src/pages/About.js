@@ -73,6 +73,9 @@ const styles = () => ({
     fontSize: '2.1rem',
     marginRight: 10,
     color: '#111',
+    '@media screen and (max-width: 550px)': {
+      display: 'block',
+    },
   },
 });
 

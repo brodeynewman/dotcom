@@ -14,6 +14,10 @@ const styles = () => ({
     color: '#666',
     background: 'transparent',
     border: 'none',
+    '@media screen and (max-width: 550px)': {
+      display: 'none',
+    },
+    cursor: 'pointer',
   },
 });
 

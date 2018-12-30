@@ -48,6 +48,15 @@ const styles = () => ({
   submit: {
     marginTop: 30,
   },
+  success: {
+    marginTop: 10,
+    padding: 15,
+    color: '#bbb',
+    '@media screen and (max-width: 850px)': {
+      fontSize: '.8rem',
+      textAlign: 'center',
+    },
+  },
 });
 
 /**
@@ -62,6 +71,7 @@ class Contact extends React.PureComponent {
 
   state = {
     isSubmitting: false,
+    hasSubmitted: false,
   };
 
   handleSubmit = (e) => {
@@ -70,7 +80,11 @@ class Contact extends React.PureComponent {
     this.setState({ isSubmitting: true });
 
     setTimeout(() => {
-      this.setState({ isSubmitting: false });
+      this.setState({ isSubmitting: false, hasSubmitted: true });
+
+      setTimeout(() => {
+        this.setState({ hasSubmitted: false });
+      }, 5000);
     }, 1500);
   }
 
@@ -78,7 +92,7 @@ class Contact extends React.PureComponent {
    * @inheritDoc
    */
   render() {
-    const { isSubmitting } = this.state;
+    const { isSubmitting, hasSubmitted } = this.state;
     const { classes, transitionState } = this.props;
 
     const shouldEnter = transitionState === 'entering' || transitionState === 'entered';
@@ -87,6 +101,7 @@ class Contact extends React.PureComponent {
       <div className={classes.root}>
         <Back />
         <CSSTransition
+          key="body"
           in={shouldEnter}
           timeout={200}
           classNames="fade"
@@ -130,6 +145,7 @@ class Contact extends React.PureComponent {
               </div>
               <div className={classes.submit}>
                 <Button
+                  disabled={isSubmitting}
                   variant="outlined"
                   type="submit"
                 >
@@ -137,6 +153,17 @@ class Contact extends React.PureComponent {
                 </Button>
               </div>
             </form>
+            <CSSTransition
+              key="submit"
+              in={hasSubmitted}
+              timeout={200}
+              classNames="fade"
+              unmountOnExit
+            >
+              <div className={classes.success}>
+                Thanks, I will get back to you shortly..
+              </div>
+            </CSSTransition>
           </div>
         </CSSTransition>
       </div>

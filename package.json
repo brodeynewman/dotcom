@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx webpack-dev-server --config=./config/webpack.common.js --progress --hot -d --open",
     "build": "webpack -p --config=./config/webpack.production.js",
-    "test": "exit 0"
+    "test": "exit 0",
+    "deploy": "npm run build && ./scripts/deploy.sh"
   },
   "keywords": [],
   "author": "",
