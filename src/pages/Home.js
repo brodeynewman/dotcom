@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import { CSSTransition } from 'react-transition-group';
+
+import withMountedTransition from '../components/withMountedTransition';
 
 const styles = () => ({
   root: {
@@ -13,17 +16,28 @@ const styles = () => ({
   name: {
     fontWeight: 800,
     fontSize: 35,
+    '@media screen and (max-width: 850px)': {
+      fontSize: '2rem',
+      display: 'block',
+    },
   },
   info: {
     paddingLeft: 10,
     maxWidth: 450,
     fontSize: '2rem',
     color: '#666',
+    '@media screen and (max-width: 850px)': {
+      fontSize: '1.5rem',
+      paddingLeft: 0,
+    },
   },
   bio: {
     paddingTop: 10,
     fontSize: '2rem',
     color: '#666',
+    '@media screen and (max-width: 850px)': {
+      fontSize: '1.25rem',
+    },
   },
   passport: {
     borderBottom: '2px solid #bd93f9',
@@ -32,6 +46,10 @@ const styles = () => ({
     color: 'black',
     fontSize: '2rem',
     display: 'inline-block',
+    '@media screen and (max-width: 850px)': {
+      fontSize: '1.25rem',
+      marginLeft: 8,
+    },
   },
   links: {
     position: 'fixed',
@@ -62,31 +80,45 @@ const styles = () => ({
 export class Home extends React.PureComponent {
   static propTypes = {
     classes: PropTypes.shape({}).isRequired,
+    transitionState: PropTypes.string.isRequired,
   }
 
   /**
    * @inheritDoc
    */
   render() {
-    const { classes } = this.props;
+    const { classes, transitionState } = this.props;
+
+    const shouldEnter = transitionState === 'entering' || transitionState === 'entered';
 
     return (
       <div className={classes.root}>
         <div>
-          <span className={classes.name}>Brodey Newman</span>
-          <span className={classes.info}>is a software engineer based out of Charlotte, NC.</span>
-          <div className={classes.bio}>
-            Currently working at
-            <a
-              rel="noopener noreferrer"
-              target="_blank"
-              href="http://passportinc.com"
-              className={classes.passport}
-            >
-                Passport Inc
-            </a>
-            .
-          </div>
+          <CSSTransition
+            in={shouldEnter}
+            timeout={200}
+            classNames="fade"
+            unmountOnExit
+          >
+            <div>
+              <span className={classes.name}>Brodey Newman</span>
+              <span className={classes.info}>
+                is a software engineer based out of Charlotte, NC.
+              </span>
+              <div className={classes.bio}>
+                Currently working at
+                <a
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  href="http://passportinc.com"
+                  className={classes.passport}
+                >
+                    Passport Inc
+                </a>
+                .
+              </div>
+            </div>
+          </CSSTransition>
           <ul className={classes.links}>
             <a
               rel="noopener noreferrer"
@@ -105,4 +137,4 @@ export class Home extends React.PureComponent {
   }
 }
 
-export default withStyles(styles)(Home);
+export default withMountedTransition(withStyles(styles)(Home));
