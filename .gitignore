@@ -2,3 +2,5 @@
 .env
 dist
 .DS_Store
+bin
+.serverless

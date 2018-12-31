@@ -1,0 +1,25 @@
+service:
+  name: brodeynewman.com
+
+package:
+ exclude:
+   - ./**
+ include:
+   - ./bin/**
+
+provider:
+  name: aws
+  runtime: go1.x
+  region: us-east-1
+  endpointType: regional
+  timeout: 10
+  memorySize: 256
+  profile: default
+  stage: ${self:custom.stage}
+
+  environment:
+    EMAIL: brodeynewman@gmail.com
+
+functions:
+  handle_email:
+    handler: ./bin/handle_email/main
