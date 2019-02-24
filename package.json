@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "npx webpack-dev-server --config=./config/webpack.common.js --progress --hot -d --open",
+    "start:serverless": "AWS_PROFILE=node npx serverless offline --target=local --region=us-east-1 start",
+    "build:serverless": "serverless --target=dev --region=us-east-1 package",
     "build": "webpack -p --config=./config/webpack.production.js",
     "test": "exit 0",
     "deploy": "npm run build && ./scripts/deploy.sh"
@@ -31,6 +33,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
+    "aws-sdk": "^2.409.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^2.0.2",
@@ -41,6 +44,8 @@
     "eslint-plugin-react": "^7.11.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "serverless-offline": "^4.6.0",
+    "serverless-webpack": "^5.2.0",
     "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.14",

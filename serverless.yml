@@ -1,25 +1,38 @@
-service:
-  name: brodeynewman.com
+service: brodeynewman
 
 package:
- exclude:
-   - ./**
- include:
-   - ./bin/**
+  include:
+    - serverless/**/*.js
+    - serverless/**/*.map.js
+  exclude:
+    - serverless/**/*.test.js
+    - serverless/**/*.spec.js
+    - node_modules/aws-sdk/**
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+
+custom:
+  webpack:
+    webpackConfig: ./config/webpack.serverless.js
 
 provider:
   name: aws
-  runtime: go1.x
-  region: us-east-1
+  runtime: nodejs8.10
+  region: 'us-east-1'
   endpointType: regional
   timeout: 10
   memorySize: 256
-  profile: default
-  stage: ${self:custom.stage}
+  profile: 'default'
 
   environment:
     EMAIL: brodeynewman@gmail.com
 
 functions:
   handle_email:
-    handler: ./bin/handle_email/main
+    handler: serverless/functions/handle_email/index.handler
+    events:
+      - http:
+          path: /email
+          method: post
