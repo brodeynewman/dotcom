@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx webpack-dev-server --config=./config/webpack.common.js --progress --hot -d --open",
-    "start:serverless": "AWS_PROFILE=node npx serverless offline --target=local --region=us-east-1 start",
+    "start:serverless": "AWS_PROFILE=default npx serverless offline --target=local --region=us-east-1 start",
     "build:serverless": "serverless --target=dev --region=us-east-1 package",
     "build": "webpack -p --config=./config/webpack.production.js",
     "test": "exit 0",

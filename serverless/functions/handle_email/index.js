@@ -4,14 +4,21 @@ AWS.config.update({ region: 'us-east-1' });
 
 const SES = new AWS.SES({ apiVersion: '2010-12-01' });
 
-const handleSendEmail = async (event, context, callback) => {
-  console.log(event);
+const handleSendEmail = async (event, context) => {
+  const { message, sender } = event.body;
+
+  if (!message || !sender) {
+    context.fail(JSON.stringify({
+      statusCode: '400',
+      body: JSON.stringify({ error: 'you messed up!' }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }));
+  }
 
   const params = {
     Destination: {
-      CcAddresses: [
-        process.env.EMAIL,
-      ],
       ToAddresses: [
         process.env.EMAIL,
       ],
@@ -32,21 +39,10 @@ const handleSendEmail = async (event, context, callback) => {
         Data: 'An email was sent from "brodeynewman.com"',
       },
     },
-    Source: 'SENDER_EMAIL_ADDRESS',
-    ReplyToAddresses: [
-      'EMAIL_ADDRESS',
-    ],
+    Source: 'brodeynewman@gmail.com',
   };
 
-  const email = await SES.sendEmail(params).promise();
-
-  return callback(null, {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'Expecto Petronum',
-      input: event,
-    }),
-  });
+  // const email = await SES.sendEmail(params).promise();
 };
 
 export const handler = handleSendEmail;

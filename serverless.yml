@@ -5,6 +5,7 @@ package:
     - serverless/**/*.js
     - serverless/**/*.map.js
   exclude:
+    - src/**/*
     - serverless/**/*.test.js
     - serverless/**/*.spec.js
     - node_modules/aws-sdk/**
